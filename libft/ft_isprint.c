@@ -5,16 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 14:14:17 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/01 14:14:17 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:11 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:11 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	if (c > 31 && c < 127)
-		return (1);
-	return (0);
+	return ((c >= 32 && c <= 126) || c == ' ');
 }

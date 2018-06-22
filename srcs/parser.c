@@ -76,24 +76,23 @@ void			apply_atoi_2_strings_and_store(char *map_data_after_parsing,
 {
 	char	**newline_split_map;
 	char	**space_split_str;
-	int		**stored_map;
 	int		ints[4];
 
 	ints[0] = -1;
-	ints[1] = 0;
 	newline_split_map = ft_strsplit(map_data_after_parsing, '\n');
 	ints[2] = len_star_star(newline_split_map);
-	stored_map = (int **)malloc(sizeof(int *) * ints[2]);
+	god->stored_map = (int **)malloc(sizeof(int *) * ints[2]);
 	while (newline_split_map[++ints[0]])
 	{
 		space_split_str = ft_strsplit(newline_split_map[ints[0]], ' ');
 		ints[3] = len_star_star(space_split_str);
-		stored_map[ints[0]] = (int *)malloc(sizeof(int) * ints[3]);
+		god->stored_map[ints[0]] = (int *)malloc(sizeof(int) * ints[3]);
 		ints[1] = -1;
 		while (++ints[1] < ints[3])
-			stored_map[ints[0]][ints[1]] = ft_atoi(space_split_str[ints[1]]);
+			god->stored_map[ints[0]][ints[1]] = ft_atoi(space_split_str[ints[1]]);
+		free_array((void**)(space_split_str));
 	}
+	free_array((void**)(newline_split_map));
 	god->width = ints[3];
 	god->height = ints[2];
-	god->stored_map = stored_map;
 }

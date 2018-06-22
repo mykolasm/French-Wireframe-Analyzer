@@ -5,47 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/23 09:52:56 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/06/20 14:53:05 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:22 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:22 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_ko_newline(char **str, char **line)
+int		take_newline_out(char **str, char **line)
 {
-	char *temp;
+	char *tmp;
 
-	if (!(temp = ft_strchr(*str, '\n')))
+	if (!(tmp = ft_fst_strchr(*str, '\n')))
 		return (0);
-	*line = ft_strsub(*str, 0, temp - *str);
-	ft_strncpy(*str, temp + 1, ft_strlen(temp));
+	*line = ft_strsub(*str, 0, tmp - *str);
+	ft_memmove(*str, tmp + 1, ft_strlen(tmp));
 	return (1);
 }
 
-int		ft_join(int const fd, char *dat_file_data[FD_LIMIT], char **line)
+int		read_buffsize_till_newline(int const fd, char *file_dt[FD_LIMIT],
+							char **line)
 {
-	int		ret;
+	int		byte_size;
 	char	buf[BUFF_SIZE + 1];
-	char	*temp;
+	char	*tmp;
 
-	if (dat_file_data[fd] == NULL)
-		if (!(dat_file_data[fd] = ft_strnew(1)) || (read(fd, buf, 0) < 0))
+	if (!(file_dt[fd]))
+		if (!(file_dt[fd] = ft_strnew(1)) || (read(fd, buf, 0) < 0))
 			return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while ((byte_size = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		buf[ret] = '\0';
-		temp = dat_file_data[fd];
-		if (!(dat_file_data[fd] = ft_strjoin(dat_file_data[fd], buf)))
+		buf[byte_size] = '\0';
+		tmp = file_dt[fd];
+		if (!(file_dt[fd] = ft_strjoin(file_dt[fd], buf)))
 			return (-1);
-		ft_strdel((char **)&temp);
-		if (ft_ko_newline(&dat_file_data[fd], line))
+		ft_memdel((void **)&tmp);
+		if (take_newline_out(&file_dt[fd], line))
 			return (1);
 	}
-	if (dat_file_data[fd] && !(dat_file_data[fd][0] == '\0'))
+	if (file_dt[fd] && !(file_dt[fd][0] == '\0'))
 	{
-		*line = dat_file_data[fd];
-		dat_file_data[fd] = NULL;
+		*line = file_dt[fd];
+		file_dt[fd] = NULL;
 		return (1);
 	}
 	return (0);
@@ -54,12 +55,12 @@ int		ft_join(int const fd, char *dat_file_data[FD_LIMIT], char **line)
 int		get_next_line(int const fd, char **line)
 {
 	static char	*file_data[FD_LIMIT];
-	int			gnl_return_val;
+	int			error_check;
 
-	if (line == NULL || fd < 0 || fd > FD_LIMIT)
+	if (!line || fd < 0 || fd > FD_LIMIT)
 		return (-1);
-	if (file_data[fd] && ft_ko_newline(&file_data[fd], line))
+	if (file_data[fd] && take_newline_out(&file_data[fd], line))
 		return (1);
-	gnl_return_val = ft_join(fd, file_data, line);
-	return (gnl_return_val);
+	error_check = read_buffsize_till_newline(fd, file_data, line);
+	return (error_check);
 }

@@ -5,24 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/02 10:22:50 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/02 10:22:50 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:15 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:15 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putnbr(int n)
+void	ft_putnbr(int n)
 {
-	long num;
+	long nb;
 
-	num = n;
-	if (num < 0)
+	nb = n;
+	if (nb < 0)
 	{
 		ft_putchar('-');
-		num *= -1;
+		nb = nb * -1;
 	}
-	if (num > 9)
-		ft_putnbr(num / 10);
-	ft_putchar(num % 10 + 48);
+	if (nb >= 10)
+		ft_putnbr(nb / 10);
+	ft_putchar('0' + nb % 10);
 }

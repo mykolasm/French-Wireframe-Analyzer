@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs_value.c                                     :+:      :+:    :+:   */
+/*   make_zero_from_neg.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/12 16:05:23 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/12 16:05:23 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:22 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:22 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_abs_value(int n)
+int	make_zero_from_neg(int c)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	if (c < 0)
+		return (0);
+	return (c);
 }

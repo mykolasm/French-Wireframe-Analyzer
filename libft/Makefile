@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/01/22 17:10:30 by mray              #+#    #+#              #
-#    Updated: 2018/06/20 14:55:35 by mmarcink         ###   ########.fr        #
+#    Created: 2018/06/22 09:05:58 by mmarcink          #+#    #+#              #
+#    Updated: 2018/06/22 09:05:58 by mmarcink         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ ft_memalloc.c\
 ft_memccpy.c\
 ft_memchr.c\
 ft_memcmp.c\
-ft_make_word.c\
 ft_memcpy.c\
 ft_memdel.c\
 ft_memmove.c\
@@ -72,7 +71,16 @@ ft_strsub.c\
 ft_strtrim.c\
 ft_tolower.c\
 ft_toupper.c\
+is_ws.c\
+make_zero_from_neg.c\
+get_num_digi.c\
+put_base.c\
+g_n.c\
 get_next_line.c\
+ft_fst_strchr.c\
+ft_is_max.c\
+ft_atoi_base.c\
+free_array.c\
 
 all: $(NAME)
 

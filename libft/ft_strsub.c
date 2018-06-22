@@ -5,25 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 17:22:32 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 17:22:32 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:21 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:21 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strsub(char const *s, unsigned int start, size_t len)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*new_str;
+	char	*fresh_str;
 	size_t	i;
 
-	i = 0;
-	if (!s || !(new_str = ft_strnew(len)))
+	if (!s || !(fresh_str = ft_strnew(len)))
 		return (NULL);
-	while (i < len)
-	{
-		new_str[i] = s[start + i];
-		i++;
-	}
-	return (new_str);
+	i = -1;
+	while (++i < len)
+		*(fresh_str + i) = *(s + start + i);
+	return (fresh_str);
 }

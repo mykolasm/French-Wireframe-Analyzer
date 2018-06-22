@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_num_digits.c                                    :+:      :+:    :+:   */
+/*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/12 16:20:53 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/12 16:20:53 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:09 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:09 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_num_digits(long long z)
+void	free_array(void **array)
 {
-	int count;
+	int i;
 
-	count = 0;
-	if (z < 0)
-		count++;
-	if (z == 0)
-		return (1);
-	while (z != 0)
-	{
-		z /= 10;
-		count++;
-	}
-	return (count);
+	i = -1;
+	while (array[++i])
+		ft_memdel((void **)&array[i]);
+	free(array);
 }

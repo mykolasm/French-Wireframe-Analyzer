@@ -5,33 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/12 11:39:35 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/12 11:39:35 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:12 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:12 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list					*ft_lstmap(t_list *lstm, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *iter;
-	t_list *new_one;
+	t_list *f_elem;
+	t_list *prev_f_elem;
+	t_list *first;
 
-	if (!lstm)
-	{
+	prev_f_elem = NULL;
+	if (!lst || !f)
 		return (NULL);
-	}
-	iter = f(lstm);
-	new_one = iter;
-	while (lstm->next)
+	while (lst)
 	{
-		lstm = lstm->next;
-		if (!(iter->next = f(lstm)))
+		f_elem = f(lst);
+		if (!prev_f_elem)
 		{
-			free(iter->next);
-			return (NULL);
+			prev_f_elem = f_elem;
+			first = f_elem;
 		}
-		iter = iter->next;
+		else
+		{
+			prev_f_elem->next = f_elem;
+			prev_f_elem = f_elem;
+		}
+		lst = lst->next;
 	}
-	return (new_one);
+	return (first);
 }

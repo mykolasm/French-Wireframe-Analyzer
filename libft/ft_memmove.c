@@ -5,41 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 16:59:51 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/01 16:59:51 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:14 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:14 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** similar to memcpy() as it also copies data from a source to destination.
-** memcpy() leads to problems when source and destination addresses overlap as
-** memcpy() simply copies data one by one from one location to another.
-*/
-
 #include "libft.h"
 
-void		*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*d;
-	unsigned char	*s;
-	size_t			i;
+	size_t	tmp_len;
+	char	*src_cpy;
+	char	*dst_cpy;
 
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	i = 0;
-	if (src > dst)
+	src_cpy = (char *)src;
+	dst_cpy = (char *)dst;
+	if (src_cpy < dst_cpy)
 	{
-		while (i < len)
-		{
-			d[i] = s[i];
-			i++;
-		}
+		while (len--)
+			*(dst_cpy + len) = *(src_cpy + len);
 	}
 	else
-		while (0 < len)
-		{
-			len--;
-			d[len] = s[len];
-		}
+	{
+		tmp_len = len - 1;
+		while (len--)
+			*(dst_cpy + tmp_len - len) = *(src_cpy + tmp_len - len);
+	}
 	return (dst);
 }

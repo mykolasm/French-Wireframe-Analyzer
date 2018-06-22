@@ -5,28 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/26 17:57:24 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/02/26 17:57:24 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:16 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:16 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strcat(char *s1, const char *s2)
+char	*ft_strcat(char *dest, char *src)
 {
-	char *dst;
-	char *src;
+	char *org_string;
 
-	dst = s1;
-	src = (char *)s2;
-	while (*dst)
-		dst++;
+	org_string = dest;
+	while (*dest)
+	{
+		dest++;
+	}
 	while (*src)
 	{
-		*dst = *src;
-		dst++;
+		*dest = *src;
 		src++;
+		dest++;
 	}
-	*dst = '\0';
-	return (s1);
+	*dest = '\0';
+	return (org_string);
 }

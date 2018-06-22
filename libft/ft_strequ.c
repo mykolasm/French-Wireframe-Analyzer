@@ -5,17 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 11:24:45 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 11:24:45 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:17 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:17 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+int	ft_strequ(char const *s1, char const *s2)
 {
-	if (!s1 || !s2 || !ft_strcmp(s1, s2))
-		return (1);
-	else
-		return (0);
+	return (s1 && s2) ? ft_strcmp(s1, s2) == 0 : 0;
 }

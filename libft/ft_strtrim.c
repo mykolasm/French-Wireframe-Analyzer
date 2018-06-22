@@ -5,28 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 17:52:29 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 17:52:29 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:21 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:21 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
-	int		end;
-	char	*trim_str;
+	int		e_i;
+	char	*trimmed_str;
 
 	if (!s)
 		return (NULL);
-	while (*s && ft_is_wspace(*s))
+	while (*s && is_ws(*s))
 		s++;
-	end = ft_strlen(s) - 1;
-	while (ft_is_wspace(*(s + end)))
-		end--;
+	e_i = ft_strlen(s) - 1;
+	while (is_ws(*(s + e_i)))
+		e_i--;
 	if (!*s)
 		return (ft_strnew(1));
-	if (!(trim_str = ft_strsub(s, 0, end + 1)))
+	if (!(trimmed_str = ft_strsub(s, 0, e_i + 1)))
 		return (NULL);
-	return (trim_str);
+	return (trimmed_str);
 }

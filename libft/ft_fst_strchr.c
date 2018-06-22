@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_array_free.c                                    :+:      :+:    :+:   */
+/*   ft_fst_strchr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/20 15:24:17 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/06/20 15:24:17 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:09 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:09 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	free_array(void **array)
-{
-	int i;
+#include "libft.h"
 
-	i = -1;
-	while (array[++i])
-		ft_memdel((void **)&array[i]);
-	free(array);
+char			*ft_fst_strchr(const char *s, int c)
+{
+	while (*s != (char)c && *s != '\0')
+		s++;
+	if (*s == (char)c)
+		return ((char *)s);
+	return (NULL);
 }

@@ -5,34 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/27 15:11:11 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/02/27 15:11:11 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:18 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:18 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** line 34. set value of dest[i + j] == src[j]
-*/
 #include "libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
-	size_t		i;
-	int			j;
-	size_t		dst_len;
-	size_t		src_len;
+	unsigned int i;
+	unsigned int j;
+	unsigned int result;
 
-	i = ft_strlen(dst);
+	i = 0;
+	while (dest[i] != '\0')
+		++i;
+	result = 0;
+	while (src[result] != '\0')
+		++result;
+	if (size <= i)
+		result = result + size;
+	else
+		result = result + i;
 	j = 0;
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	if (size < dst_len + 1)
-		return (src_len + size);
-	if (size > dst_len + 1)
+	while (src[j] != '\0' && i + 1 < size)
 	{
-		while (i < size - 1)
-			*(dst + i++) = *(src + j++);
-		*(dst + i) = '\0';
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-	return (dst_len + src_len);
+	dest[i] = '\0';
+	return (result);
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/expect -f
 set filename [lindex $argv 0];
 spawn vim $filename
+send "13dd"
 send ":Stdheader\r"
 send "i"
 # Enter custom header.

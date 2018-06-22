@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/07 15:44:03 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/07 15:44:03 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:11 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:11 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
-	char *s;
+	char *str;
 
-	if (!(s = (char *)ft_memalloc(sizeof(*s) + (ft_num_digits(n)))))
+	if (!(str = (char *)ft_memalloc(sizeof(*str) + (get_num_digi(n)))))
 		return (NULL);
-	ft_what_base(n, s, ft_num_digits(n) - 1);
-	s[ft_num_digits(n)] = '\0';
-	return (s);
+	put_base(n, str, get_num_digi(n) - 1);
+	str[get_num_digi(n)] = '\0';
+	return (str);
 }

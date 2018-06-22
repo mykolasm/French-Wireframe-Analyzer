@@ -5,22 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/28 15:31:33 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/02/28 15:31:33 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:20 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:20 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	int i;
 
-	i = ft_strlen(s);
-	while (i > -1)
+	i = 0;
+	while (*s)
 	{
-		if (s[i] == c)
-			return ((char *)&s[i]);
+		s++;
+		i++;
+	}
+	while (i >= 0)
+	{
+		if (*s == (char)c)
+			return ((char*)s);
+		s--;
 		i--;
 	}
 	return (NULL);

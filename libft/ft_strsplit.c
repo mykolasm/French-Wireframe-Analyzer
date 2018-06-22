@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/06 17:11:32 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/06 17:11:32 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:20 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:20 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 
 char		**ft_strsplit(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	words;
-	char	**str_split;
+	char	**ret;
+	int		num_words;
+	int		in_word;
+	int		i;
+	int		s_i;
 
-	i = 0;
-	words = 0;
-	if (!s || !c)
+	if (!s || !c || !(ret = (char **)ft_memalloc(sizeof(char*) * (g_n(s, c)))))
 		return (NULL);
-	while (s[i] != '\0')
+	i = -1;
+	in_word = 0;
+	num_words = 0;
+	while (*(s + make_zero_from_neg(i++)))
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			words++;
-		i++;
+		if (!in_word && s[i] != c)
+		{
+			s_i = i;
+			in_word = 1;
+		}
+		else if (in_word && (s[i] == c || s[i] == '\0'))
+		{
+			ret[num_words++] = ft_strsub(s, s_i, i - s_i);
+			in_word = 0;
+		}
 	}
-	if (!(str_split = (char **)malloc(sizeof(char *) * (words + 1))))
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (i < words)
-		str_split[i++] = ft_make_word(s, c, &j);
-	str_split[i] = 0;
-	return (str_split);
+	return (ret);
 }

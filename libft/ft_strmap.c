@@ -5,25 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 16:51:12 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 16:51:12 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:18 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:18 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	char	*fresh_str;
-	size_t	i;
+	char	*n_str;
+	int		i;
 
-	i = 0;
-	if (!f || !s || !(fresh_str = ft_strnew(ft_strlen(s))) || !f || !s)
+	i = -1;
+	if (!f || !s || !(n_str = ft_strnew(ft_strlen(s))))
 		return (NULL);
-	while (s[i])
-	{
-		fresh_str[i] = f(s[i]);
-		i++;
-	}
-	return (fresh_str);
+	while (*(s + ++i))
+		*(n_str + i) = f(*(s + i));
+	return (n_str);
 }

@@ -5,25 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 20:18:06 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/01 20:18:06 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:13 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:13 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned int	i;
-	unsigned char	*temp;
+	unsigned char *s_cpy;
+	unsigned char cb;
 
-	temp = (unsigned char*)s;
-	i = 0;
-	while (i < n)
+	cb = c;
+	s_cpy = (unsigned char *)s;
+	while (n > 0)
 	{
-		if (temp[i] == (unsigned char)c)
-			return ((void *)&temp[i]);
-		i++;
+		if (*s_cpy == cb)
+			return (s_cpy);
+		s_cpy++;
+		n--;
 	}
 	return (NULL);
 }

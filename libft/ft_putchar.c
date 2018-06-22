@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/02 09:45:37 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/02 09:45:37 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:14 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:14 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }

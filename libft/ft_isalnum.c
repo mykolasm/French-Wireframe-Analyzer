@@ -5,17 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 12:11:18 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/01 12:11:18 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:10 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:10 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <ctype.h>
 
-int			ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
-	if (ft_isdigit(c) || ft_isalpha(c))
-		return (1);
-	return (0);
+	return (ft_isdigit(c) || ft_isalpha(c));
 }

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 11:18:11 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 11:18:11 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:13 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:13 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_memdel(void **ap)
+void	ft_memdel(void **ap)
 {
 	if (ap)
 	{

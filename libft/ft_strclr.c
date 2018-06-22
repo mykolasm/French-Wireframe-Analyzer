@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 11:54:32 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 11:54:32 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:16 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:16 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_strclr(char *s)
+void	ft_strclr(char *s)
 {
 	if (s)
-		ft_memset(s, '\0', ft_strlen(s));
+		while (*s)
+			*s++ = '\0';
 }

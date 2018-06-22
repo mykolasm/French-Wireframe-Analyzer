@@ -5,18 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 11:52:23 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/05 11:52:23 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:17 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:17 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_strdel(char **as)
+void	ft_strdel(char **as)
 {
-	if (as)
-	{
-		free(*as);
-		*as = NULL;
-	}
+	return (ft_memdel((void**)as));
 }

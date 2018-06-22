@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_what_base.c                                     :+:      :+:    :+:   */
+/*   ft_is_max.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmarcink <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/12 16:21:04 by mmarcink          #+#    #+#             */
-/*   Updated: 2018/03/12 16:21:04 by mmarcink         ###   ########.fr       */
+/*   Created: 2018/06/22 09:06:10 by mmarcink          #+#    #+#             */
+/*   Updated: 2018/06/22 09:06:10 by mmarcink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_what_base(long c, char *str, int i)
+int	ft_is_max(int a, int b)
 {
-	char nbr;
-
-	if (c < 0)
-	{
-		str[0] = '-';
-		c *= -1;
-	}
-	if (c >= 10)
-		ft_what_base(c / 10, str, i - 1);
-	nbr = (c % 10) + '0';
-	str[i] = nbr;
+	if (a > b)
+		return (a);
+	return (b);
 }
