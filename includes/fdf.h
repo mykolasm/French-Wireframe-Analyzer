@@ -28,6 +28,7 @@ typedef struct		s_god_struct
 	void	*window;
 }					t_god_struct;
 typedef int			t_2d_point __attribute__((vector_size(2 * sizeof(int))));
+typedef int			t_td_point __attribute__((vector_size(3 * sizeof(int))));
 t_god_struct		*create_god_struct(int width, int height, void *mlx,
 					void *window);
 void				storing_map_file_into_memory_parser(char *map_file,
@@ -41,8 +42,8 @@ void				mlx_draw_line(t_god_struct *god, int x0, int y0, int x1,
 					int y1, int color);
 void				loop_stored_map_draw_y_lines(t_god_struct *god);
 t_2d_point			magic_function_plots_2d_from_3d(int x, int y, int z);
-void				mlx_draw_3d_line(t_god_struct *god, int x0, int y0, int z0,
-					int x1, int y1, int z1, int color);
+void				mlx_draw_3d_line(t_god_struct *god,
+t_td_point td_point_1, t_td_point td_point_2, int color);
 void				mlx_draw_2d_line(t_god_struct *god, t_2d_point two_d_point1,
 					t_2d_point two_d_point2, int color);
 

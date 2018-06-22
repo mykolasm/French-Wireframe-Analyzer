@@ -110,30 +110,30 @@ void		loop_stored_map_draw_x_lines(t_god_struct *god)
 		{
 			if (ints[0] != 0)
 			{
-				mlx_draw_3d_line(god, ints[1] * 25, ints[2] * 25,
-				god->stored_map[ints[2]][ints[1]] * 2, ints[1] * 25,
-				ints[0] * 25, god->stored_map[ints[0]][ints[1]] * 2, 0xFFFFFF);
+				mlx_draw_3d_line(god, (t_td_point){ints[1] * 25, ints[2] * 25,
+god->stored_map[ints[2]][ints[1]] * 2}, (t_td_point){ints[1] * 25, ints[0] * 25,
+god->stored_map[ints[0]][ints[1]] * 2}, 0xFFFFFF);
 			}
 			if (ints[1] != 0)
-				mlx_draw_3d_line(god, ints[3] * 25, ints[0] * 25,
-				god->stored_map[ints[0]][ints[3]] * 2, ints[1] * 25,
-				ints[0] * 25, god->stored_map[ints[0]][ints[1]] * 2, 0xFFFFFF);
+				mlx_draw_3d_line(god, (t_td_point){ints[3] * 25, ints[0] * 25,
+god->stored_map[ints[0]][ints[3]] * 2}, (t_td_point){ints[1] * 25,
+ints[0] * 25, god->stored_map[ints[0]][ints[1]] * 2}, 0xFFFFFF);
 			ints[3] = ints[1];
 		}
 		ints[2] = ints[0];
 	}
 }
 
-void		mlx_draw_3d_line(t_god_struct *god, int 3d_point_1[3],
-			int 3d_point_2[3], int y1, int z1, int color)
+void		mlx_draw_3d_line(t_god_struct *god, t_td_point td_point_1,
+			t_td_point td_point_2, int color)
 {
 	t_2d_point	two_d_point1;
 	t_2d_point	two_d_point2;
 
-	two_d_point1 = magic_function_plots_2d_from_3d(3d_point_1[0], 3d_point_1[1],
-		3d_point_1[2]);
-	two_d_point2 = magic_function_plots_2d_from_3d(3d_point_2[0], 3d_point_2[1],
-		3d_point_2[2]);
+	two_d_point1 = magic_function_plots_2d_from_3d(td_point_1[0], td_point_1[1],
+		td_point_1[2]);
+	two_d_point2 = magic_function_plots_2d_from_3d(td_point_2[0], td_point_2[1],
+		td_point_2[2]);
 	ft_putnbr(two_d_point1[0]);
 	ft_putnbr(two_d_point1[1]);
 	ft_putnbr(two_d_point2[0]);
