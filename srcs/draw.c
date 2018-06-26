@@ -13,60 +13,6 @@
 #include "fdf.h"
 
 /*
-** Credits to Po-Han Lin for fast and fancy line algo
-** http://www.edepot.com/algorithm.html
-*/
-
-void		y_longer(t_god_struct *gl, t_2d_point pt_i, int para[7])
-{
-	if (para[3] > 0)
-	{
-		para[3] += pt_i[1];
-		para[6] = 0x8000 + ((int)pt_i[0] << 16);
-		while (pt_i[1] <= para[3])
-		{
-			mlx_pixel_put(gl->mlx, gl->window, para[6] >> 16, pt_i[1], para[0]);
-			para[6] += para[4];
-			++pt_i[1];
-		}
-		return ;
-	}
-	para[3] += pt_i[1];
-	para[6] = 0x8000 + ((int)pt_i[0] << 16);
-	while (pt_i[1] >= para[3])
-	{
-		mlx_pixel_put(gl->mlx, gl->window, para[6] >> 16, pt_i[1], para[0]);
-		para[6] -= para[4];
-		--pt_i[1];
-	}
-	return ;
-}
-
-void		y_not_longer(t_god_struct *gl, t_2d_point pt_i, int para[7])
-{
-	if (para[3] > 0)
-	{
-		para[3] += pt_i[0];
-		para[6] = 0x8000 + ((int)pt_i[1] << 16);
-		while (pt_i[0] <= para[3])
-		{
-			mlx_pixel_put(gl->mlx, gl->window, pt_i[0], para[6] >> 16, para[0]);
-			para[6] += para[4];
-			++pt_i[0];
-		}
-		return ;
-	}
-	para[3] += pt_i[0];
-	para[6] = 0x8000 + ((int)pt_i[1] << 16);
-	while (pt_i[0] >= para[3])
-	{
-		mlx_pixel_put(gl->mlx, gl->window, pt_i[0], para[6] >> 16, para[0]);
-		para[6] -= para[4];
-		--pt_i[0];
-	}
-}
-
-/*
 ** para[0] = color, para[1] = y_longer, para[2] = shortLen, para[3] = longLen,
 ** para[4] = decInc, para[5] = swap, para[6] = j
 */
@@ -96,28 +42,43 @@ void		super_fast_line_algo(t_god_struct *gl, t_2d_point pt_i,
 	return (y_not_longer(gl, pt_i, para));
 }
 
+void		draw_3d_line_for_norm1(t_god_struct *god, int ints[4], int mv)
+{
+	mlx_draw_3d_line(god, (t_td_point){ints[1] * (mv), ints[2]
+				* (mv), god->stored_map[ints[2]][ints[1]] * (mv)},
+(t_td_point){ints[1] * (mv), ints[0] * (mv),
+god->stored_map[ints[0]][ints[1]] * (mv)}, 0xFFFFFF);
+}
+
+void		draw_3d_line_for_norm2(t_god_struct *god, int ints[4], int mv)
+{
+	mlx_draw_3d_line(god, (t_td_point){ints[3] * (mv),
+				ints[0] * (mv), god->stored_map[ints[0]][ints[3]] * (mv)},
+				(t_td_point){ints[1] * (mv), ints[0] * (mv),
+				god->stored_map[ints[0]][ints[1]] * (mv)}, 0xFFFFFF);
+}
+
 void		loop_stored_map_draw_x_lines(t_god_struct *god)
 {
-	int ints[4];
+	int	ints[4];
+	int	mv;
 
 	ints[0] = -1;
 	ints[2] = ints[0];
 	ints[3] = ints[1];
+	if ((god->width * god->width) < WIDTH)
+		mv = WIDTH / (god->width * god->width);
+	else
+		mv = 1;
 	while (++ints[0] < god->height)
 	{
 		ints[1] = -1;
 		while (++ints[1] < god->width)
 		{
 			if (ints[0] != 0)
-			{
-				mlx_draw_3d_line(god, (t_td_point){ints[1] * 25, ints[2] * 25,
-god->stored_map[ints[2]][ints[1]] * 2}, (t_td_point){ints[1] * 25, ints[0] * 25,
-god->stored_map[ints[0]][ints[1]] * 2}, 0xFFFFFF);
-			}
+				draw_3d_line_for_norm1(god, ints, mv);
 			if (ints[1] != 0)
-				mlx_draw_3d_line(god, (t_td_point){ints[3] * 25, ints[0] * 25,
-god->stored_map[ints[0]][ints[3]] * 2}, (t_td_point){ints[1] * 25,
-ints[0] * 25, god->stored_map[ints[0]][ints[1]] * 2}, 0xFFFFFF);
+				draw_3d_line_for_norm2(god, ints, mv);
 			ints[3] = ints[1];
 		}
 		ints[2] = ints[0];
@@ -131,16 +92,8 @@ void		mlx_draw_3d_line(t_god_struct *god, t_td_point td_point_1,
 	t_2d_point	two_d_point2;
 
 	two_d_point1 = magic_function_plots_2d_from_3d(td_point_1[0], td_point_1[1],
-		td_point_1[2]);
+		td_point_1[2], god);
 	two_d_point2 = magic_function_plots_2d_from_3d(td_point_2[0], td_point_2[1],
-		td_point_2[2]);
-	ft_putnbr(two_d_point1[0]);
-	ft_putnbr(two_d_point1[1]);
-	ft_putnbr(two_d_point2[0]);
-	ft_putnbr(two_d_point2[1]);
+		td_point_2[2], god);
 	super_fast_line_algo(god, two_d_point1, two_d_point2, color);
 }
-
-/*
-** check for leaks
-*/

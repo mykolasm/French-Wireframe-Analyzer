@@ -17,6 +17,8 @@ SRC		= main.c\
 		parser.c\
 		plot.c\
 		draw.c\
+		bonus.c\
+		fast_line_algo.c\
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

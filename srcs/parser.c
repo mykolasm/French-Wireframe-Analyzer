@@ -12,33 +12,20 @@
 
 #include "fdf.h"
 
-t_god_struct	*create_god_struct(int width, int height, void *mlx,
-				void *window)
-{
-	t_god_struct *temp;
-
-	temp = ft_memalloc(sizeof(t_god_struct));
-	temp->width = width;
-	temp->height = height;
-	temp->mlx = mlx;
-	temp->window = window;
-	return (temp);
-}
-
 void			storing_map_file_into_memory_parser(char *map_file,
 				t_god_struct *god)
 {
-	int		fd;
-	int		byte_size;
+	int		shints[2];
 	char	*str;
 	char	*line;
 	char	*temp;
 
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		str = ft_strdup("");
+	shints[0] = open(map_file, O_RDONLY);
+	if (shints[0] < 0)
+		ft_error_funx();
+	str = ft_strdup("");
 	line = NULL;
-	while ((byte_size = get_next_line(fd, &line) > 0))
+	while ((shints[1] = get_next_line(shints[0], &line) > 0))
 	{
 		temp = line;
 		line = ft_strjoin(line, "\n");
@@ -54,16 +41,6 @@ void			storing_map_file_into_memory_parser(char *map_file,
 	apply_atoi_2_strings_and_store(str, god);
 }
 
-int				len_star_star(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 /*
 **	ints[0]		i;
 **	ints[1]		j;
@@ -74,25 +51,28 @@ int				len_star_star(char **str)
 void			apply_atoi_2_strings_and_store(char *map_data_after_parsing,
 					t_god_struct *god)
 {
-	char	**newline_split_map;
-	char	**space_split_str;
-	int		ints[4];
-
-	ints[0] = -1;
-	newline_split_map = ft_strsplit(map_data_after_parsing, '\n');
-	ints[2] = len_star_star(newline_split_map);
-	god->stored_map = (int **)malloc(sizeof(int *) * ints[2]);
-	while (newline_split_map[++ints[0]])
+	god->ints[0] = -1;
+	god->ints[4] = -1;
+	god->n_s_m = ft_strsplit(map_data_after_parsing, '\n');
+	god->ints[2] = len_star_star(god->n_s_m);
+	god->height = god->ints[2];
+	god->stored_map = (int **)malloc(sizeof(int *) * god->ints[2]);
+	while (god->n_s_m[++god->ints[0]])
 	{
-		space_split_str = ft_strsplit(newline_split_map[ints[0]], ' ');
-		ints[3] = len_star_star(space_split_str);
-		god->stored_map[ints[0]] = (int *)malloc(sizeof(int) * ints[3]);
-		ints[1] = -1;
-		while (++ints[1] < ints[3])
-			god->stored_map[ints[0]][ints[1]] = ft_atoi(space_split_str[ints[1]]);
-		free_array((void**)(space_split_str));
+		god->s_s_s = ft_strsplit(god->n_s_m[god->ints[0]], ' ');
+		god->ints[3] = len_star_star(god->s_s_s);
+		god->stored_map[god->ints[0]] =
+				(int *)malloc(sizeof(int) * god->ints[3]);
+		god->ints[1] = -1;
+		while (++god->ints[1] < god->ints[3])
+			god->stored_map[god->ints[0]][god->ints[1]] =
+					ft_atoi(god->s_s_s[god->ints[1]]);
+		free_array((void**)(god->s_s_s));
+		if (god->ints[4] != -1 && god->ints[3] != god->ints[4])
+			ft_bad_format();
+		god->ints[4] = god->ints[3];
 	}
-	free_array((void**)(newline_split_map));
-	god->width = ints[3];
-	god->height = ints[2];
+	god->width = god->ints[3];
+	free_array((void**)(god->n_s_m));
+	free(map_data_after_parsing);
 }
